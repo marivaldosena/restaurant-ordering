@@ -1,0 +1,15 @@
+version: "3.5"
+
+services:
+
+  localstack:
+    build: ./infrastructure
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=sns
+      - DEBUG=${DEBUG-}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
